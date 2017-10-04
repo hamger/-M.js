@@ -242,22 +242,3 @@
 		root.$M = $;
 	}
 }.call(this))
-
-var Hanger = $M.Class({
-    name$:'Hanger',
-    sayHello:function(){
-        console.log('Hi,my name is ' + this.name)
-    }
-})
-
-var hanger = new Hanger()
-
-var hanger2 = new ($M.Class({
-    inherit:Hanger,
-    age:22
-}))()
-
-console.log(hanger2.name)
-// hanger2.sayHello()
-
-hanger2.hasOwnProperty('age')
