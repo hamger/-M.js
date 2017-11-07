@@ -230,7 +230,22 @@
             document.head.appendChild(style)
         }
     }
-
+    
+   	//  普通字符串转为 unicode 编码的字符串  
+	function str2Unicode(str) {  
+	    var res = [];  
+	    for ( var i=0; i<str.length; i++ ) {  
+	    res[i] = ( "00" + str.charCodeAt(i).toString(16) ).slice(-4);  
+	    }  
+	    return "\\u" + res.join("\\u");  
+	}  
+	
+	// unicode 编码的字符串转为普通字符串
+	function unicode2Str(str) {  
+	    str = str.replace(/\\/g, "%");  
+	    return unescape(str);  
+	} 
+	
     // 暴露接口
 	if (typeof exports == "object") {
 		module.exports = $;
