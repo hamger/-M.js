@@ -232,7 +232,7 @@
     }
     
    	//  普通字符串转为 unicode 编码的字符串  
-	function str2Unicode(str) {  
+	function encodeUnicode(str) {  
 	    var res = [];  
 	    for ( var i=0; i<str.length; i++ ) {  
 	    res[i] = ( "00" + str.charCodeAt(i).toString(16) ).slice(-4);  
@@ -241,7 +241,7 @@
 	}  
 	
 	// unicode 编码的字符串转为普通字符串
-	function unicode2Str(str) {  
+	function decodeUnicode(str) {  
 	    str = str.replace(/\\/g, "%");  
 	    return unescape(str);  
 	} 
