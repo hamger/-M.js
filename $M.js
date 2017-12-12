@@ -1,10 +1,13 @@
 /*************************************************************
- *@Author		: Hanger 
- *@Date		    : 2017/7/7 
- *@Comments     : Personal JavaScript framework
+ *@Author   : Hanger 
+ *@Date     : 2017/7/7 
+ *@Comments : Personal JavaScript framework
  **************************************************************/
-(function () {
-    var root = this
+(function(global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+        typeof define === 'function' && define.amd ? define(factory) :
+        (global.$M = factory());
+}(this, (function() {
     var $ = {
         NAME: '$M.js',
         AUTHOR: 'Hanger',
@@ -12,36 +15,54 @@
     }
 
     // 判断类型
-    $.type = function (arg) {
+    $.type = function(arg) {
         if (arg === null) {
             return "null"
-        } else if (typeof (arg) == "object") {
+        } else if (typeof(arg) == "object") {
             if (arg instanceof Array) {
                 return "array"
             } else {
                 return "object"
             }
         } else {
-            return typeof (arg)
+            return typeof(arg)
         }
     }
 
+    // 判断是否是空对象
+    $.isEmptyObj = function(obj) {
+        if ($.type(obj) === 'object') {
+            for (var key in obj) return false
+            return true
+        }
+        return false
+    }
+
+    // 判断是否是空数组
+    $.isEmptyArr = function(arr) {
+        if ($.type(arr) === 'array') {
+            if (arr.length === 0) return true
+            return false
+        }
+        return false
+    }
+
     // 创建一个类
-    $.Class = function (obj) {
-        var that 
+    $.Class = function(obj) {
+        var that
         var obj = obj || {}
-        var inClass = function () {
-            that = this  
+        var inClass = function() {
+            that = this
             if (this.initialize) {
                 this.initialize.apply(this, arguments)
             }
         }
         for (var key in obj) {
-            if(obj.hasOwnProperty(key)){
+            if (obj.hasOwnProperty(key)) {
                 if (key == "inherit") { // 利用原型链实现继承
                     inClass.prototype = new obj[key]()
-                } else if($.type(obj[key]) == 'function' || /\$$/.test(key)){
-                    key = key.substr(0,key.length -1)
+                } else if ($.type(obj[key]) == 'function' || /\$$/.test(key)) {
+                    key = key.substr(0, key.length - 1)
                     inClass.prototype[key] = obj[key]
                 } else {
                     that[key] = obj[key]
@@ -52,7 +73,7 @@
     }
 
     // 字符串模板引擎
-    $.tplEngine = function (tpl, data, separator) {
+    $.tplEngine = function(tpl, data, separator) {
         // 初始化参数
         if (!separator && separator !== 0) {
             separator = ','
@@ -95,7 +116,7 @@
         }
 
         // 变量填充 
-        var tpl = tpl.replace(/<@([^@>]+)?@>/g, function (match, $1) {
+        var tpl = tpl.replace(/<@([^@>]+)?@>/g, function(match, $1) {
             var $1 = $1.trim()
             if (/\|/.test($1)) {
                 var arr = $1.split('|')
@@ -109,7 +130,7 @@
 
         // 属性填充
         if (data) {
-            tpl = tpl.replace(/<%([^%>]+)?%>/g, function (match, $1) {
+            tpl = tpl.replace(/<%([^%>]+)?%>/g, function(match, $1) {
                 var $1 = $1.trim()
                 if (/\|/.test($1)) {
                     var arr = $1.split('|')
@@ -124,7 +145,7 @@
     }
 
     // 转Date对象
-    $.toDate = function (dateArg) {
+    $.toDate = function(dateArg) {
         if (Object.prototype.toString.call(dateArg) == "[object Date]") {
             return dateArg
         } else if ($.type(dateArg) == 'number' || 'string') {
@@ -135,11 +156,13 @@
     }
 
     // Date对象转日期
-    $.dateFormat = function (date, format) {
+    $.dateFormat = function(date, format) {
         var date = $.toDate(date)
         var format = format || 'yyyy/MM/dd'
-        var tf = function (i) { return (i < 10 ? '0' : '') + i };
-        return format.replace(/yyyy|MM|dd|hh|mm|ss/g, function (a) {
+        var tf = function(i) {
+            return (i < 10 ? '0' : '') + i
+        };
+        return format.replace(/yyyy|MM|dd|hh|mm|ss/g, function(a) {
             switch (a) {
                 case 'yyyy':
                     return tf(date.getFullYear());
@@ -164,19 +187,22 @@
     }
 
     // 日期比较大小,返回负数date1更早
-    $.dateCompare = function (date1, date2) {
+    $.dateCompare = function(date1, date2) {
         var date1 = $.toDate(date1)
         var date2 = $.toDate(date2)
         return date1.getTime() - date2.getTime()
     }
 
     // 对象深克隆
-    $.clone = function (obj) {
+    $.clone = function(obj) {
         var clone = {}
-        var cloneOf = function (item) {
+        var cloneOf = function(item) {
             switch ($.type(item)) {
-                case 'array': case 'object': return $.clone(item);
-                default: return item;
+                case 'array':
+                case 'object':
+                    return $.clone(item);
+                default:
+                    return item;
             }
         }
         for (var key in obj) {
@@ -186,12 +212,13 @@
     }
 
     // 获得路由参数
-    $.getUrlParams = function () {
+    $.getUrlParams = function() {
         var url = window.document.location.href.toString(),
             urlSlice = url.split('?')
         if (urlSlice[1]) {
             urlSlice = urlSlice[1].split('&')
-            var pObj = {}, pArr = []
+            var pObj = {},
+                pArr = []
             for (var i = 0; i < urlSlice.length; i++) {
                 pArr = urlSlice[i].split('=')
                 pObj[pArr[0]] = pArr[1]
@@ -203,57 +230,26 @@
     }
 
     // 字符串溢出省略
-    $.omitStr = function (str, len, start) {
+    $.omitStr = function(str, len, start) {
         var len = len || str.length
         var start = start || 0
         return str.subStr(strat, len) + '...'
     }
 
-    // 移动端支持px开发
-    $.supportPx = function (size) {
-        var size = size || 640
-        if (/Android (\d+\.\d+)/.test(navigator.userAgent)) {
-            var version = parseFloat(RegExp.$1);
-            if (version > 2.3) {
-                var phoneScale = parseInt(window.screen.width) / size;
-                document.write('<meta name="viewport" content="width=' + size + ', minimum-scale = ' + phoneScale + ', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi">')
-            } else {
-                document.write('<meta name="viewport" content="width=' + size + ', target-densitydpi=device-dpi">')
-            }
-        } else {
-            document.write('<meta name="viewport" content="width=' + size + ', user-scalable=no, target-densitydpi=device-dpi">')
+    //  普通字符串转为 unicode 编码的字符串  
+    $.encodeUnicode = function (str) {
+        var res = [];
+        for (var i = 0; i < str.length; i++) {
+            res[i] = ("00" + str.charCodeAt(i).toString(16)).slice(-4);
         }
-
-        if (window.innerWidth != size) {
-            var style = document.createElement("style")
-            style.appendChild(document.createTextNode("html{zoom:" + (window.innerWidth / size) + ";}"))
-            document.head.appendChild(style)
-        }
+        return "\\u" + res.join("\\u");
     }
-    
-   	//  普通字符串转为 unicode 编码的字符串  
-	function encodeUnicode(str) {  
-	    var res = [];  
-	    for ( var i=0; i<str.length; i++ ) {  
-	    res[i] = ( "00" + str.charCodeAt(i).toString(16) ).slice(-4);  
-	    }  
-	    return "\\u" + res.join("\\u");  
-	}  
-	
-	// unicode 编码的字符串转为普通字符串
-	function decodeUnicode(str) {  
-	    str = str.replace(/\\/g, "%");  
-	    return unescape(str);  
-	} 
-	
-    // 暴露接口
-	if (typeof exports == "object") {
-		module.exports = $;
-	} else if (typeof define == "function" && define.amd) {
-		define([], function () {
-			return $;
-		})
-	} else {
-		root.$M = $;
-	}
-}.call(this))
+
+    // unicode 编码的字符串转为普通字符串
+    $.decodeUnicode = function (str) {
+        str = str.replace(/\\/g, "%");
+        return unescape(str);
+    }
+
+    return $;
+})));
