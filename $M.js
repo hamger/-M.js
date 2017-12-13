@@ -233,7 +233,7 @@
     $.omitStr = function(str, len, start) {
         var len = len || str.length
         var start = start || 0
-        return str.subStr(strat, len) + '...'
+        return str.substr(strat, len) + '...'
     }
 
     //  普通字符串转为 unicode 编码的字符串  
