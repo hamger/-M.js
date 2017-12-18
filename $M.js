@@ -1,6 +1,6 @@
 /*************************************************************
- *@Author   : Hanger 
- *@Date     : 2017/7/7 
+ *@Author   : Hanger
+ *@Date     : 2017/7/7
  *@Comments : Personal JavaScript framework
  **************************************************************/
 (function(global, factory) {
@@ -115,7 +115,7 @@
             }
         }
 
-        // 变量填充 
+        // 变量填充
         var tpl = tpl.replace(/<@([^@>]+)?@>/g, function(match, $1) {
             var $1 = $1.trim()
             if (/\|/.test($1)) {
@@ -236,7 +236,7 @@
         return str.substr(strat, len) + '...'
     }
 
-    //  普通字符串转为 unicode 编码的字符串  
+    //  普通字符串转为 unicode 编码的字符串
     $.encodeUnicode = function (str) {
         var res = [];
         for (var i = 0; i < str.length; i++) {
@@ -247,8 +247,8 @@
 
     // unicode 编码的字符串转为普通字符串
     $.decodeUnicode = function (str) {
-        str = str.replace(/\\/g, "%");
-        return unescape(str);
+        // str = str.replace(/\\/g, "%");
+        return decodeURI(str);
     }
 
     return $;
