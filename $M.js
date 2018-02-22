@@ -235,6 +235,25 @@
         var start = start || 0
         return str.substr(strat, len) + '...'
     }
+    
+    // 根据需要将一维数组转化为二维数组
+    $.sortData = function (arr, key) {
+      var arr2 = [];
+      var j = 0;
+      for (var i = 0;i < arr.length; i++) {
+        if (i === 0) {
+          arr2[j] = [];
+          arr2[j].push(arr[i]);
+        } else {
+          if (arr[i][key] !== arr[i - 1][key]) {
+            j++;
+            arr2[j] = [];
+          }
+          arr2[j].push(arr[i]);
+        }
+      }
+      return arr2;
+    }
 
     //  普通字符串转为 unicode 编码的字符串
     $.encodeUnicode = function (str) {
