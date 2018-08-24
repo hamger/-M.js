@@ -98,3 +98,12 @@ export function arrSort (arr, key = false, isDescend) {
     throw Error(`the params 'key' of arrSort must be boolean or string.`)
   }
 }
+
+/**
+ * 根据 key 获取对象中的值
+ * @param {取值对象} obj
+ * @param {描述键的字符串，支持链式键，如 a.b.c} key
+ */
+export function getValInObj (obj, key) {
+  return key.split('.').reduce((obj, name) => obj[name], obj)
+}
