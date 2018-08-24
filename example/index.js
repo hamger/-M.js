@@ -1,5 +1,4 @@
-import M from '@'
+import F from '@'
+// import F from '../dist/hg-jslibrary.js'
 
-console.log(M.isNumber(234))
-console.log(M.NAME)
-console.log(M.AUTHOR)
+console.log(F)

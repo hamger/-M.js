@@ -4,11 +4,11 @@ const AnnotatePlugin = require('annotate-webpack-plugin')
 
 module.exports = {
   target: 'web',
-  entry: './src/index.js',
+  entry: path.resolve(__dirname, '../src'),
   output: {
     filename: 'hg-jslibrary.js',
     path: path.resolve(__dirname, '../dist'),
-    library: 'M',
+    library: 'hg-jslibrary',
     libraryTarget: 'umd'
   },
   resolve: {
@@ -29,7 +29,7 @@ module.exports = {
   plugins: [
     new UglifyJsPlugin(),
     new AnnotatePlugin({
-      author: 'hanger',
+      author: 'Hanger',
       create: '2017/7/7'
     })
   ]

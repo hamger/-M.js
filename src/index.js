@@ -1,10 +1,9 @@
 import * as type from './type'
 import * as date from './date'
-
-const M = Object.assign({
-  NAME: 'hg-jslibrary.js',
+const F = Object.assign({
   AUTHOR: 'Hanger',
-  VERSION: '1.0.0'
+  VERSION: '0.1.0'
 }, type, date)
 
-export default M
+window.F = F
+export default F
