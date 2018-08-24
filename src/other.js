@@ -1,31 +1,5 @@
 import { type } from './type'
 
-// 创建一个类
-export function Class (obj) {
-  var that
-  var obj = obj || {}
-  var inClass = function () {
-    that = this
-    if (this.initialize) {
-      this.initialize.apply(this, arguments)
-    }
-  }
-  for (var key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      if (key === 'inherit') {
-        // 利用原型链实现继承
-        inClass.prototype = new obj[key]()
-      } else if (type(obj[key]) === 'Function' || /\$$/.test(key)) {
-        key = key.substr(0, key.length - 1)
-        inClass.prototype[key] = obj[key]
-      } else {
-        that[key] = obj[key]
-      }
-    }
-  }
-  return inClass
-}
-
 // 对象深克隆
 export function clone (obj) {
   var clone = {}
