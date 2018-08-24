@@ -1,4 +1,4 @@
-import { type } from './type'
+import { type, isBoolean, isString } from './type'
 
 // 对象深克隆
 export function clone (obj) {
@@ -74,4 +74,27 @@ export function encodeUnicode (str) {
 // unicode 编码的字符串转为普通字符串
 export function decodeUnicode (str) {
   return decodeURI(str)
+}
+/**
+ * 对数组进行排序
+ * @param {需要处理的数组} arr
+ * @param {处理对象数组时需要传入的每项的标记属性} key
+ * @param {是否是降序，默认升序} isDescend
+ */
+export function arrSort (arr, key = false, isDescend) {
+  if (isBoolean(key)) {
+    // 对每项是数字的数组排序
+    arr.sort(function (a, b) {
+      if (key) return b - a
+      else return a - b
+    })
+  } else if (isString(key)) {
+    // 对每项是对象的数组排序
+    arr.sort(function (a, b) {
+      if (isDescend) return b[key] - a[key]
+      else return a[key] - b[key]
+    })
+  } else {
+    throw Error(`the params 'key' of arrSort must be boolean or string.`)
+  }
 }

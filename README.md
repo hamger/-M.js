@@ -3,6 +3,9 @@
 Library of common JavaScript function
 
 ## Changelog
+### 2018.8.24
+
+> v0.1.1 添加 arrSort 方法
 
 ### 2018.8.23
 

@@ -8,7 +8,7 @@ module.exports = {
   output: {
     filename: 'hg-jslibrary.js',
     path: path.resolve(__dirname, '../dist'),
-    library: 'hg-jslibrary',
+    library: 'hgJslibrary',
     libraryTarget: 'umd'
   },
   resolve: {
