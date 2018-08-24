@@ -3,7 +3,7 @@ export function type (arg) {
 }
 
 export function isFunction (arg) {
-  return type(arg) === 'Fuction'
+  return type(arg) === 'Function'
 }
 
 export function isObject (arg) {
