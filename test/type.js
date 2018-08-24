@@ -8,7 +8,9 @@ import {
   isStrOrNum,
   isNumber,
   isArray,
-  isDef
+  isDef,
+  isEmptyObj,
+  isEmptyArr
 } from '../src/type'
 
 describe('type', () => {
@@ -44,5 +46,15 @@ describe('type', () => {
   it('isDef use to check the variate defined', () => {
     var a
     expect(isDef(a)).toBe(false)
+  })
+  it('isEmptyObj use to check the empty Object', () => {
+    expect(isEmptyObj({})).toBe(true)
+    expect(isEmptyObj({a: 12})).toBe(false)
+    expect(isEmptyObj([])).toBe(false)
+  })
+  it('isEmptyArr use to check the empty Array', () => {
+    expect(isEmptyArr([])).toBe(true)
+    expect(isEmptyArr([1,2])).toBe(false)
+    expect(isEmptyArr({})).toBe(false)
   })
 })
