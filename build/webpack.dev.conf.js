@@ -5,9 +5,9 @@ const path = require('path')
 module.exports = {
   entry: './example/index.js',
   output: './dist/',
-  devtool: "eval-source-map",
+  devtool: 'eval-source-map',
   resolve: {
-    extensions: [".jsx", ".json", ".js"],
+    extensions: ['.jsx', '.json', '.js'],
     alias: {
       '@': path.resolve(__dirname, '../src')
     }
@@ -18,7 +18,7 @@ module.exports = {
         test: /.js$/,
         loaders: ['babel-loader', 'eslint-loader'],
         include: [
-          path.resolve(__dirname, '../src'), 
+          path.resolve(__dirname, '../src'),
           path.resolve(__dirname, '../demo')
         ]
       }
@@ -41,6 +41,9 @@ module.exports = {
       filename: 'index.html',
       template: 'example/index.html',
       inject: true
+    }),
+    new webpack.ProvidePlugin({
+      f: ['hg-jslibrary', 'default']
     })
   ]
-};
+}

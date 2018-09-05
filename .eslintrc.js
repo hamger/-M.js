@@ -8,6 +8,7 @@ module.exports = {
   },
   extends: ['standard'],
   rules: {
+    'no-undef': 0,
     'no-new': 0,
     'no-useless-constructor': 0,
     'operator-linebreak': ['error', 'after'],
