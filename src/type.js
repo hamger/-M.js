@@ -39,9 +39,10 @@ export function isStrOrNum (arg) {
   return isString(arg) || isNumber(arg)
 }
 
-// 判断值是否被定义
+// 判断值是否存在(0返回ture)
 export function isDef (arg) {
-  return !isNull(arg) && !isUndefined(arg)
+  if (arg || arg === 0) return true
+  else return false
 }
 
 // 判断是否是空对象

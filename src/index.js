@@ -1,10 +1,10 @@
 import * as type from './type'
 import * as date from './date'
 import * as other from './other'
-const F = Object.assign({
+const f = Object.assign({
   AUTHOR: 'Hanger',
-  VERSION: '0.1.0'
+  VERSION: '0.1.3'
 }, type, date, other)
 
-window.F = F
-export default F
+window.f = f
+export default f
