@@ -1,42 +1,3 @@
-# hg-jslibrary
-
-Library of common JavaScript function
-
-## Install
-
-```bash
-npm install hg-jslibrary
-```
-
-## Usage
-
-```js
-import f from "hg-jslibrary";
-
-console.log(f.isFunction(console.log));
-// ture
-```
-
-如果你希望每个文件里都使用`import`引入，需如下配置
-
-```js
-// webpack.config.js
-module.exports = {
-  ...
-  plugins: [
-   new webpack.ProvidePlugin({
-      f: ['hg-jslibrary', 'default']
-    })
-  ]
-}
-```
-
-## API
-
-[文档地址](https://hamger.github.io/hg-jslibrary/)
-
-### type
-
 | function         | parameter  | description                 | return  |
 | ---------------- | ---------- | --------------------------- | ------- |
 | type(arg)        | `arg`: any | 判断数据类型                | String  |
@@ -55,18 +16,28 @@ module.exports = {
 | isEmptyArr(arg)  | `arg`: any | 判断是否为空数组            | Boolean |
 | isMobile()       | --         | 判断是否为移动端            | Boolean |
 
-## Changelog
+### type(arg)
 
-### 2018.8.24
+- 参数
 
-> v0.1.3 添加 isDef 方法
+  - `{any} arg`
 
-### 2018.8.24
+- 返回值：{string} 用于描述数据类型的字符串
 
-> v0.1.2 添加 getValInObj 方法
+- 用法
+  ```js
+  f.type(new Date()); // "Date"
+  ```
 
-> v0.1.1 添加 arrSort 方法
+### isFunction(arg)
 
-### 2018.8.23
+- 参数
 
-> v0.1.0 初始化项目
+  - `{any} arg`
+
+- 返回值：{boolean} 是否为函数类型
+
+- 用法
+  ```js
+  f.isFunction(console.log); // true
+  ```
