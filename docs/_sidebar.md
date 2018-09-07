@@ -6,4 +6,5 @@
   * [string](/string.md)
   * [array](/array.md)
   * [object](/object.md)
+  * [other](/other.md)
   

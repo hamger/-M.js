@@ -4,11 +4,10 @@ export function getUrlParams () {
     urlSlice = url.split('?')
   if (urlSlice[1]) {
     urlSlice = urlSlice[1].split('&')
-    var pObj = {},
-      pArr = []
+    var pObj = {}
     for (var i = 0; i < urlSlice.length; i++) {
-      pArr = urlSlice[i].split('=')
-      pObj[pArr[0]] = pArr[1]
+      var index = urlSlice[i].indexOf('=')
+      pObj[urlSlice[i].substring(0, index)] = urlSlice[i].substring(index + 1)
     }
     return pObj
   } else {
