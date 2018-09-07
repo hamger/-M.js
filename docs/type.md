@@ -17,27 +17,17 @@
 | isMobile()       | --         | 判断是否为移动端            | Boolean |
 
 ### type(arg)
+- 描述：
+  
+  判断数据类型
 
-- 参数
+- 参数：
 
   - `{any} arg`
 
-- 返回值：{string} 用于描述数据类型的字符串
+- 返回值：`{string}`
 
-- 用法
+- 示例：
   ```js
   f.type(new Date()); // "Date"
-  ```
-
-### isFunction(arg)
-
-- 参数
-
-  - `{any} arg`
-
-- 返回值：{boolean} 是否为函数类型
-
-- 用法
-  ```js
-  f.isFunction(console.log); // true
   ```

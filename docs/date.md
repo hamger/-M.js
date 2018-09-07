@@ -1,32 +1,34 @@
-### delBlank(str)
+### dateFormat(date, format)
 
-- 参数
+- 描述：
 
-  - `{string} str`
+  格式化日期显示形式
 
-- 返回值：{string} 去除空格后的字符串
+- 参数：
 
-- 用法
-  去除字符串两侧的空格，内含的多个空格转化为一个空格
+  - `{Date | string | number} date` 日期对象、或者可以转化为日期对象的字符串或时间戳
+  - `{string} format` 规定返回的日期格式，使用`y`表示年，`M`表示月，`d`表示天，`h`表示小时，`m`表示分，`s`表示秒，字母前加`0`表示不满十的情况前面加 0，默认`y/M/d h:0m:0s`
 
-- 示例  
+- 返回值：`{string}`
+
+- 示例：
   ```js
-  f.delBlank(' he ll  o ')  // "he ll o"
+  f.dateFormat(new Date(), "y/M/d h:0m"); // "2018/9/7 11:06"
   ```
 
-### omitStr (str, len)
+### relativeDate (dayCount)
 
-- 参数
+- 描述：
 
-  - `{string} str` 原字符串
-  - `{number} len` 最大长度，默认为原字符串的长度
+  获取相对于今天的日期对象
 
-- 返回值：{string} 省略的字符串
+- 参数：
 
-- 用法
-  字符串溢出省略
+  - `{number} dayCount` 0 表示今天、-1 表示昨天、1 返回明天，以此类推
 
-- 示例  
+- 返回值：`{Date}`
+
+- 示例：
   ```js
-  f.omitStr(' hello world', 6) // " hello..."
+  f.relativeDate(1); // Sat Sep 08 2018 11:34:09 GMT+0800 (中国标准时间)
   ```

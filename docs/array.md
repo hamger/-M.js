@@ -1,32 +1,39 @@
-### delBlank(str)
+### arrSort(arr, key, isDescend)
 
-- 参数
+- 描述：
 
-  - `{string} str`
+  对数组进行排序
 
-- 返回值：{string} 去除空格后的字符串
+- 参数：
 
-- 用法
-  去除字符串两侧的空格，内含的多个空格转化为一个空格
+  - `{Array} arr` 原数组
+  - `{string} key` 处理对象数组时需要传入的每项的标记属性，
+  - `{boolean} isDescend` 是否是降序，默认`false`，升序
 
-- 示例  
+  > 原数组的每一项是数字的情况，函数的第二个参数视为 `isDescend`
+
+- 返回值：`{Array}` 重排后的原数组
+
+- 示例：
+
   ```js
-  f.delBlank(' he ll  o ')  // "he ll o"
+  f.arrSort([2, 34, 4, 5, 22], true); // [34, 22, 5, 4, 2]
+  f.arrSort([{id: 2},{id: 1},{id: 3}], "id"); // [{id: 1},{id: 2},{id: 3}]
   ```
 
-### omitStr (str, len)
+### relativeDate (dayCount)
 
-- 参数
+- 描述：
 
-  - `{string} str` 原字符串
-  - `{number} len` 最大长度，默认为原字符串的长度
+  获取相对于今天的日期对象
 
-- 返回值：{string} 省略的字符串
+- 参数：
 
-- 用法
-  字符串溢出省略
+  - `{number} dayCount` 0 表示今天、-1 表示昨天、1 返回明天，以此类推
 
-- 示例  
+- 返回值：`{Date}`
+
+- 示例：
   ```js
-  f.omitStr(' hello world', 6) // " hello..."
+  f.relativeDate(1); // Sat Sep 08 2018 11:34:09 GMT+0800 (中国标准时间)
   ```

@@ -97,3 +97,17 @@ export function Class (obj) {
   }
   return inClass
 }
+
+//  普通字符串转为 unicode 编码的字符串
+export function encodeUnicode (str) {
+  var res = []
+  for (var i = 0; i < str.length; i++) {
+    res[i] = ('00' + str.charCodeAt(i).toString(16)).slice(-4)
+  }
+  return '\\u' + res.join('\\u')
+}
+
+// unicode 编码的字符串转为普通字符串
+export function decodeUnicode (str) {
+  return decodeURI(str)
+}

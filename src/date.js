@@ -1,7 +1,7 @@
 import { type, isStrOrNum } from './type'
 
 // 转Date对象
-export function toDate (dateArg) {
+function toDate (dateArg) {
   if (type(dateArg) === 'Date') {
     return dateArg
   } else if (isStrOrNum(dateArg)) {
@@ -11,27 +11,39 @@ export function toDate (dateArg) {
   }
 }
 
+function add0 (i) {
+  return (i < 10 ? '0' : '') + i
+}
+
 // Date对象转日期
 export function dateFormat (date, format) {
   var date = toDate(date)
-  var format = format || 'yyyy/MM/dd'
-  var tf = function (i) {
-    return (i < 10 ? '0' : '') + i
-  }
-  return format.replace(/yyyy|MM|dd|hh|mm|ss/g, function (a) {
+  var format = format || 'y/M/d h:0m:0s'
+
+  return format.replace(/y|0M|M|0d|d|0h|h|0m|m|0s|s/g, function (a) {
     switch (a) {
-      case 'yyyy':
-        return tf(date.getFullYear())
-      case 'MM':
-        return tf(date.getMonth() + 1)
-      case 'mm':
-        return tf(date.getMinutes())
-      case 'dd':
-        return tf(date.getDate())
-      case 'hh':
-        return tf(date.getHours())
-      case 'ss':
-        return tf(date.getSeconds())
+      case 'y':
+        return date.getFullYear()
+      case 'M':
+        return date.getMonth() + 1
+      case '0M':
+        return add0(date.getMonth() + 1)
+      case 'd':
+        return date.getDate()
+      case '0d':
+        return add0(date.getDate())
+      case 'h':
+        return date.getHours()
+      case '0h':
+        return add0(date.getHours())
+      case 'm':
+        return date.getMinutes()
+      case '0m':
+        return add0(date.getMinutes())
+      case 's':
+        return date.getSeconds()
+      case '0s':
+        return add0(date.getSeconds())
     }
   })
 }
@@ -41,15 +53,5 @@ export function relativeDate (dayCount) {
   if (dayCount === null) dayCount = 0
   var dd = new Date()
   dd.setDate(dd.getDate() + dayCount)
-  var y = dd.getFullYear()
-  var m = dd.getMonth() + 1
-  var d = dd.getDate()
-  return y + '/' + m + '/' + d
-}
-
-// 日期比较大小,返回负数date1更早
-export function dateCompare (date1, date2) {
-  var date1 = toDate(date1)
-  var date2 = toDate(date2)
-  return date1.getTime() - date2.getTime()
+  return dd
 }
