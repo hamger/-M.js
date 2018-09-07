@@ -5,4 +5,5 @@
   * [date](/date.md)
   * [string](/string.md)
   * [array](/array.md)
+  * [object](/object.md)
   
