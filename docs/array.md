@@ -6,13 +6,13 @@
 
 - 参数：
 
-  - `{Array} arr` 原数组
+  - `{Array} arr` 源数组
   - `{string} key` 处理对象数组时需要传入的每项的标记属性，
   - `{boolean} isDescend` 是否是降序，默认`false`，升序
 
-  > 原数组的每一项是数字的情况，函数的第二个参数视为 `isDescend`
+  > 源数组的每一项是数字的情况，函数的第二个参数视为 `isDescend`
 
-- 返回值：`{Array}` 重排后的原数组
+- 返回值：`{Array}` 重排后的源数组
 
 - 示例：
 
@@ -21,19 +21,54 @@
   f.arrSort([{id: 2},{id: 1},{id: 3}], "id"); // [{id: 1},{id: 2},{id: 3}]
   ```
 
-### relativeDate (dayCount)
+### arrFold (arr, key)
 
 - 描述：
 
-  获取相对于今天的日期对象
+  根据分类，将合适的一维数组折叠为二维数组
 
 - 参数：
 
-  - `{number} dayCount` 0 表示今天、-1 表示昨天、1 返回明天，以此类推
+  - `{Array} arr` 源数组
+  - `{string} key` 每项的标记属性
 
-- 返回值：`{Date}`
+- 返回值：`{Array}`
 
 - 示例：
   ```js
-  f.relativeDate(1); // Sat Sep 08 2018 11:34:09 GMT+0800 (中国标准时间)
+  var arr = [
+    {
+      type: 'c',
+      value: 'c1'
+    },
+    {
+      type: 'c',
+      value: 'c2'
+    },
+    {
+      type: 'b',
+      value: 'b1'
+    }
+  ]
+  f.arrFold(arr, 'type')
+  /*
+  [
+    [
+      {
+        type: 'c',
+        value: 'c1'
+      },
+      {
+        type: 'c',
+        value: 'c2'
+      }
+    ],
+    [
+      {
+        type: 'b',
+        value: 'b1'
+      }
+    ]
+  ]
+  */
   ```

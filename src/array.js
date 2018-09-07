@@ -1,7 +1,7 @@
 import { isNumber } from './type'
 
 // 根据需要将一维数组转化为二维数组
-export function sortData (arr, key) {
+export function arrFold (arr, key) {
   var arr2 = []
   var j = 0
   for (var i = 0; i < arr.length; i++) {
