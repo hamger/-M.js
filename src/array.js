@@ -1,4 +1,5 @@
 import { isNumber } from './type'
+import { getValInObj } from './object'
 
 // 根据需要将一维数组转化为二维数组
 export function arrFold (arr, key) {
@@ -36,8 +37,8 @@ export function arrSort (arr, key, isDescend = false) {
   } else {
     // 对每项是对象的数组排序
     arr.sort(function (a, b) {
-      if (isDescend) return b[key] - a[key]
-      else return a[key] - b[key]
+      if (isDescend) return getValInObj(b, key) - getValInObj(a, key)
+      else return getValInObj(a, key) - getValInObj(b, key)
     })
   }
   return arr
