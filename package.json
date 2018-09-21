@@ -1,7 +1,7 @@
 {
   "name": "hg-jslibrary",
   "description": "Library of common JavaScript function",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "author": "Hanger <2313303800@qq.com>",
   "license": "MIT",
   "scripts": {
