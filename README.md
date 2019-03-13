@@ -36,6 +36,10 @@ module.exports = {
 
 ## Changelog
 
+### 2018.3.14
+
+> v0.1.7 修复打包错误
+
 ### 2018.9.7
 
 > v0.1.6 添加 parseUrl 方法
