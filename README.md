@@ -2,6 +2,8 @@
 
 Library of common JavaScript function
 
+[文档地址](https://hamger.github.io/hg-jslibrary/)
+
 ## Install
 
 ```bash
@@ -29,10 +31,6 @@ module.exports = {
   ]
 }
 ```
-
-## API
-
-[文档地址](https://hamger.github.io/hg-jslibrary/)
 
 ## Changelog
 
